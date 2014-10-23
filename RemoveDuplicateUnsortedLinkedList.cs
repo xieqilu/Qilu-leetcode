@@ -1,5 +1,4 @@
-//2 Remove duplicates from an unsorted LinkedList
-//
+
 //Follow Up: how to solve this problem if a temporary buffer is not allowed?
 //
 //	2.1 fastest solution
