@@ -18,12 +18,10 @@ namespace StringRotation
 	{
 		public static bool CheckRotation(string str1, string str2)
 		{
-			if (str1.Length != str2.Length)
-				return false;
-			string newStr = string.Concat (str1, str1); //string.concat concatenate two strings
-			if (newStr.Contains (str2))
-				return true;
-			else
+			if (str1.Length == str2.Length && str1.Length > 0) { //do not forget to check if two strings are both empty
+				string newStr = string.Concat (str1, str1); //string.concat concatenate two strings
+				return newStr.Contains (str2);
+			} else
 				return false;
 		}
 	}
@@ -32,8 +30,7 @@ namespace StringRotation
 	{
 		public static void Main (string[] args)
 		{
-			string str1 = "abcdefg";
-			string str2 = "efgabcd";
+			string str2 = "efgkbcd";
 			string str3 = "gabcdef";
 			Console.WriteLine (Finder.CheckRotation (str2,str3));
 		}
