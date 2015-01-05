@@ -31,7 +31,7 @@ namespace MinStack
 		public void Push(int x)
 		{
 			GeneralStack.Push (x);
-			if (MinimumStack.Count == 0 || x < MinimumStack.Peek ())
+			if (MinimumStack.Count == 0 || x <= MinimumStack.Peek ()) //consider duplicate element!!
 				MinimumStack.Push (x);
 		}
 
