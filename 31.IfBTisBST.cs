@@ -39,11 +39,11 @@ namespace DeterminBST
 			return IsBSTHelper (root, high, low);
 		}
 
-		private bool InOrderHelper(TreeNode root, ref int prev)//Time: O(n) Space:O(1)
+		private bool InOrderHelper(TreeNode root,ref int prev)//Time: O(n) Space:O(1)
 		{												  // In order Travesal of a binary search tree
 			if (root == null)							  // will output the node value strictly in increasing order!
 				return true;							  
-			if (InOrderHelper (root.Left, ref prev)) {
+			if (InOrderHelper (root.Left,ref prev)) {
 				if (root.Value > prev) {
 					prev = root.Value;
 					return InOrderHelper (root.Right, ref prev);
