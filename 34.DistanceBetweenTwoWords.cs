@@ -11,6 +11,87 @@ using System.Collections;
 
 namespace WordsDistanceInString
 {
+	public class Word
+	{
+		public int value { get; set;}
+		public string id {get;set;}
+
+		public Word(int v, string i)
+		{
+			this.value = v;
+			this.id = i;
+		}
+	}
+
+	public class PreProcessFinder
+	{
+		private static List<string> words = new List<string> (){ "I", "am", "a", "good", "boy", "I", "good" };
+
+		private static Dictionary<string, List<int>> dic = new Dictionary<string, List<int>> ();
+
+		public static void DocumentAnalyzer()
+		{
+			for(int i=0;i<words.Count;i++) {
+				if (!dic.ContainsKey (words [i])) {
+					List<int> temp = new List<int> ();
+					temp.Add (i);
+					dic.Add (words [i], temp);
+				} else {
+					dic [words [i]].Add (i);
+				}
+			}
+		}
+
+		public static void Print()
+		{
+			foreach (string s in words) {
+				Console.Write (s + ": ");
+				foreach (int i in dic[s]) {
+					Console.Write (i + " ");
+				}
+				Console.WriteLine ("");
+			}
+		}
+
+		public static int FindClosestPairs(string a, string b)
+		{
+			List<int> aList = dic [a];
+			List<int> bList = dic [b];
+			List<Word> fList = new List<Word> ();
+
+
+			int i = 0;
+			int j = 0;
+
+			while (i < aList.Count || j < bList.Count) {
+				if (i<aList.Count &&(j == bList.Count || aList [i] < bList [j])) {
+					Word w = new Word (aList[i], "a");
+					fList.Add (w);
+					i++;
+
+					continue;
+				} else if (j<bList.Count&&(i == aList.Count || aList [i] > bList [j])) {
+					Word w = new Word (bList[j], "b");
+					fList.Add (w);
+					j++;
+					continue;
+				}
+			}
+
+			int min = int.MaxValue;
+
+			for(int k=0;k<fList.Count-1;k++){
+				if (fList [k].id != fList [k + 1].id) {
+					int temp = fList [k + 1].value - fList [k].value;
+					if (temp < min)
+						min = temp;
+				}
+			}
+
+			return min;
+		}
+	}
+
 	public class Finder
 	{
 
@@ -72,6 +153,10 @@ namespace WordsDistanceInString
 
 			string test = "I am a good boy I good";
 			Console.WriteLine (Finder.FindShortestDisText (test, "am", "good"));
+			PreProcessFinder.DocumentAnalyzer ();
+			PreProcessFinder.Print ();
+			int res = PreProcessFinder.FindClosestPairs ("I", "good");
+			Console.WriteLine (res);
 
 		}
 	}
