@@ -8,7 +8,13 @@
 //Set(key, value): set the new value to the specific key
 //if the key doesn't exist, insert the new (key, value)
 //to the cache, if the cache is full of capacity, remove
-//the least rechetly used item before inserting new item.
+//the least recently used item before inserting new item.
+
+//Solution:
+//use combination of hashtable and list to store the key value pair
+//hashtable<entry.key, index of entry in list>
+//List<entry>, head of list: least recently used element; end of list: most recently used element
+
 
 using System;
 using System.Collections.Generic;
@@ -38,12 +44,12 @@ namespace LRUCache
 			this.capaciity = capacity;
 		}
 
-		//move cacheEntry to the head of the list
+		//move cacheEntry to the end of the list
 		private void MoveToHead(int key)
 		{
 			CacheEntry temp = this.list [this.dic [key]];
 			this.list.RemoveAt (this.dic [key]);
-			this.list.Add (temp);  //add temp to the end of list, use end as head
+			this.list.Add (temp);  //add temp to the end of list
 			this.dic [key] = this.list.Count - 1;
 		}
 
@@ -64,7 +70,7 @@ namespace LRUCache
 					this.dic.Remove (this.list [0].Key);
 					this.list.RemoveAt (0);
 				}
-				//add the new cacheEntry to cache
+				//add the new cacheEntry to the end of list
 				this.list.Add (temp);
 				this.dic.Add (key, this.list.Count - 1);
 			} else {
