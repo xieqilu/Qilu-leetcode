@@ -11,6 +11,10 @@ using System.Collections;
 
 namespace WordsDistanceInString
 {
+
+	//Pre process the document/text and find the closest pairs faster for multiple times
+
+	//create a wrapper class to wrap a value(location) and an ID indicating which list it belongs to
 	public class Word
 	{
 		public int value { get; set;}
@@ -23,6 +27,8 @@ namespace WordsDistanceInString
 		}
 	}
 
+	//use a hashtable to store each word and its locations.
+	//key: word,  value: a list containing all of its locations
 	public class PreProcessFinder
 	{
 		private static List<string> words = new List<string> (){ "I", "am", "a", "good", "boy", "I", "good" };
@@ -42,17 +48,22 @@ namespace WordsDistanceInString
 			}
 		}
 
-		public static void Print()
-		{
-			foreach (string s in words) {
-				Console.Write (s + ": ");
-				foreach (int i in dic[s]) {
-					Console.Write (i + " ");
-				}
-				Console.WriteLine ("");
-			}
-		}
+//		public static void Print()
+//		{
+//			foreach (string s in words) {
+//				Console.Write (s + ": ");
+//				foreach (int i in dic[s]) {
+//					Console.Write (i + " ");
+//				}
+//				Console.WriteLine ("");
+//			}
+//		}
 
+		//retrive two lists from the hashtable with locations
+		//merge the lists together and mantain the new list sorted
+		//example: new list: {1a, 2a, 4b, 9a, 10b,15a,19b,25a}
+		//traverse this merged list to find the minimum distance between two consecutive numbers
+		//which have different list tags(ID).
 		public static int FindClosestPairs(string a, string b)
 		{
 			List<int> aList = dic [a];
@@ -154,7 +165,7 @@ namespace WordsDistanceInString
 			string test = "I am a good boy I good";
 			Console.WriteLine (Finder.FindShortestDisText (test, "am", "good"));
 			PreProcessFinder.DocumentAnalyzer ();
-			PreProcessFinder.Print ();
+			//PreProcessFinder.Print ();
 			int res = PreProcessFinder.FindClosestPairs ("I", "good");
 			Console.WriteLine (res);
 
