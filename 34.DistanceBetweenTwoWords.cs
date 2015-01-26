@@ -31,11 +31,11 @@ namespace WordsDistanceInString
 	//key: word,  value: a list containing all of its locations
 	public class PreProcessFinder
 	{
-		private static List<string> words = new List<string> (){ "I", "am", "a", "good", "boy", "I", "good" };
+		//private static List<string> words = new List<string> (){ "I", "am", "a", "good", "boy", "I", "good" };
 
 		private static Dictionary<string, List<int>> dic = new Dictionary<string, List<int>> ();
 
-		public static void DocumentAnalyzer()
+		public static void DocumentAnalyzer(List<string> words)
 		{
 			for(int i=0;i<words.Count;i++) {
 				if (!dic.ContainsKey (words [i])) {
@@ -160,11 +160,12 @@ namespace WordsDistanceInString
 		public static void Main (string[] args)
 		{
 			string[] text = new string[]{ "I", "am", "a", "good", "boy","I","good" };
+			List<string> words = new List<string> (){ "I", "am", "a", "good", "boy", "I", "good" };
 			Console.WriteLine (Finder.FindShortestDis (text, "I", "good"));
 
 			string test = "I am a good boy I good";
 			Console.WriteLine (Finder.FindShortestDisText (test, "am", "good"));
-			PreProcessFinder.DocumentAnalyzer ();
+			PreProcessFinder.DocumentAnalyzer (words);
 			//PreProcessFinder.Print ();
 			int res = PreProcessFinder.FindClosestPairs ("I", "good");
 			Console.WriteLine (res);
@@ -172,3 +173,4 @@ namespace WordsDistanceInString
 		}
 	}
 }
+
