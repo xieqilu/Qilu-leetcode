@@ -36,7 +36,13 @@ namespace FindLoopLinkedList
 				if (slow == fast)  //if two pointers meet, there is a loop
 					break;
 			}
-			if (fast.next == null)
+			
+			//two cases: fast is now null or fast is at the last node of list
+			//so we need to check both fast and fast.next
+			//if either fast or fast.next is null, we know there is no cycle
+			//cannot check fast.next first, because if fast is now null, there
+			//gonna be nullpointer exception
+			if (fast == null || fast.next == null)
 				return null;
 
 			slow = head;
