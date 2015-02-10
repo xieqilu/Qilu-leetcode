@@ -5,6 +5,11 @@
 //duplicate points
 //vertical line (avoid division by 0)
 
+//Edge case: 
+//only one point in array
+//all points in array are duplicate
+//No point in array
+
 using System;
 using System.Collections.Generic;
 using System.Collections;
@@ -39,9 +44,9 @@ namespace MaxPointsOnLine
 				dic.Clear (); //clear dic each time
 				duplicate = 1; //reset duplicate flag
 				for (int j = 0; j < points.Length; j++) {
-					if (i == j) //skip the point itself
+					if (i == j) { //skip the point itself
 						continue;
-
+					}
 					//handle duplicate
 					if (points [i].x == points [j].x && points [i].y == points [j].y) {
 						duplicate++;
@@ -57,6 +62,15 @@ namespace MaxPointsOnLine
 					else {
 						dic.Add (key, 1);
 					}
+				}
+
+				//if only one point in the array or all points are duplicate, dic 
+				//will contain no pair, but the output should be 1 or more, because if all points
+				//are the same they still at the same line. so we need to handle this case!!
+				if (dic.Count == 0) {
+					if (duplicate > MaxNum)
+						MaxNum = duplicate;
+					continue;
 				}
 
 				//Shows How to iterate an unordered data strucutre
@@ -79,6 +93,11 @@ namespace MaxPointsOnLine
 			};
 
 			Console.WriteLine (Finder.FindMaxPoints (points));
+			Console.WriteLine (Finder.FindMaxPoints (new Point[]{})); //edge case: no point in the array
+
+			//Very important edge case: only 1 point in the array, result should be 1
+			//it's easily to forget handle this edge case, 0 is a wrong result!!!!
+			Console.WriteLine (Finder.FindMaxPoints (new Point[]{ new Point (0, 0) }));
 		}
 	}
 }
