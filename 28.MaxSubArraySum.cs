@@ -25,6 +25,32 @@ namespace MaxSubArraySum
 			return true;
 		}
 
+		public static int FindLargestSumEasy(int[] a){
+			//handle edge case: all elements are negative
+			if (IsAllNegative (a)) {
+				int max = a [0];
+				foreach (int i in a) {
+					if (i > max)
+						max = i;
+				}
+				return max;
+			}
+
+			int currentMax = 0, finalMax = 0;
+			foreach (int i in a) {
+				if (i < 0) {
+					currentMax = currentMax + i;
+					if (currentMax < 0)
+						currentMax = 0;
+				} else {
+					currentMax = currentMax + i;
+					if (currentMax > finalMax)
+						finalMax = currentMax;
+				}
+			}
+			return finalMax;
+		}
+		
 		//solution1
 		public static int FindLargestSum(int[] a) //time: O(n)  space: O(1)
 		{
@@ -71,6 +97,7 @@ namespace MaxSubArraySum
 			int[] test = new int[6]{ 2, -4, -4, 5, 9, 3 };
 			Console.WriteLine (Finder.FindLargestSum (test));
 			Console.WriteLine (Finder.FindLargestSumSimple (test));
+			Console.WriteLine (Finder.FindLargestSumEasy (test));
 		}
 	}
 }
