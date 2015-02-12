@@ -1,12 +1,19 @@
-//A linked list is given such that each node contains an additional random pointer 
-//which could point to any node in the list or null.
-//
-//Return a deep copy of the list.
+/**
+ * 1, Copy regular LinkedList
+ * Solution:
+ * Traverse the original list, and copy new node in each step
+ * 
+ * 2, Copy LinkedList with random pointer
+ * A linked list is given such that each node contains an additional random pointer 
+ * which could point to any node in the list or null.
+* 
+* Return a deep copy of the list.
 
-//Three steps:
-//1, insert new node after each node in original list
-//2, copy the random pointer of each node to the new node after it
-//3, split current list to get the expected duplicate list
+* Three steps:
+* 1, insert new node after each node in original list
+* 2, copy the random pointer of each node to the new node after it
+* 3, split current list to get the expected duplicate list
+* */
 
 using System;
 using System.Collections;
@@ -28,8 +35,44 @@ namespace CopyListRandomPointer
 		}
 	}
 
+	class Node{
+		public int Value{ get; private set;}
+		public Node Next{ get; set;}
+		public Node(int value)
+		{
+			this.Value = value;
+			this.Next = null;
+		}
+	}
+
 	class MainClass
 	{
+		//Copy regular LinkedList 
+		public static Node CopyRegular(Node head){
+			Node newHead = new Node (head.Value);
+			Node current = head;
+			Node newCurrent = newHead;
+			while (current.Next != null) {
+				Node newNext = new Node (current.Next.Value);
+				newCurrent.Next = newNext;
+				current = current.Next;
+				newCurrent = newCurrent.Next;
+			}
+			return newHead;
+		}
+
+		//print regular LinkedList
+		public static void PrintRegularList(Node head){
+			Node temp = head;
+			while (temp != null) {
+				if (temp.Next != null)
+					Console.Write (temp.Value + "->" + temp.Next.Value);
+				Console.WriteLine (" ");
+				temp = temp.Next; //do not forget this!
+			}
+		}
+
+		//copy LinkedList with Random Pointer
 		public static ListNode DeepCopy(ListNode head)
 		{
 			//empty list handle
@@ -100,6 +143,20 @@ namespace CopyListRandomPointer
 			PrintList (testList [0]);
 			Console.WriteLine ("------------------------------");
 			PrintList (newList);
+
+			Console.WriteLine ("----Test regular List-----");
+
+			Node[] testList1 = new Node[]{new Node(1),new Node(2),new Node(3),new Node(4)};
+			for (int i = 0; i < testList1.Length-1; i++) {
+
+
+				testList1 [i].Next = testList1 [i + 1];
+			}
+
+			Node newHead = CopyRegular (testList1 [0]);
+			PrintRegularList (testList1 [0]);
+			Console.WriteLine ("------------------------------");
+			PrintRegularList (newHead);
 
 		}
 	}
