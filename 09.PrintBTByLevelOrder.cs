@@ -1,5 +1,57 @@
 //Print a Binary Tree Level by Level
 
+/**
+ * Given a binary tree, return the level order traversal of its nodes' values. (ie, from left to right, level by level).
+
+For example:
+Given binary tree {3,9,20,#,#,15,7},
+    3
+   / \
+  9  20
+    /  \
+   15   7
+return(print) its level order traversal as:
+[
+  [3],
+  [9,20],
+  [15,7]
+]
+
+/**
+ * Definition for binary tree
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+
+/**
+* java is always pass by value, even if we pass an object,
+	* we actually pass the value of the object reference.
+* Which means if we change the object itself in the method,
+	* the change is visible to the caller.
+* But if we let the reference point to another object,
+	* the change is not visible to the caller.
+	* 
+	* In the following code:
+	* when we want to add currentNodes to allNodes and then clear
+* currentNodes, if we directly add currentNodes to allNodes and then
+	* call currentNodes.clear(). The list added to allNodes will be cleared.
+	* Because by add currentNodes to allNodes, we actually add the reference
+	* to allNodes. So use reference to clear the object will change the object
+	* in allNodes.
+	* To avoid this problem, we need copy elements of currentNodes to a temp list
+	* and then add the temp list to allNodes.
+	* 
+	* In C#, when passing object, default situation is the same as in Java. That is,
+	* we actually pass the value of the object reference. If we use ref or out when passing
+* object, then we actually pass the reference of object reference. Then if we let
+	* the reference point to another object, the change is visible to the caller.
+	* */
+
+
 using System;
 using System.Collections.Generic;
 
