@@ -49,6 +49,8 @@ namespace CopyListRandomPointer
 	{
 		//Copy regular LinkedList 
 		public static Node CopyRegular(Node head){
+			if (head == null)
+				return null;
 			Node newHead = new Node (head.Value);
 			Node current = head;
 			Node newCurrent = newHead;
