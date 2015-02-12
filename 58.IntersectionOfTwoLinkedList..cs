@@ -9,6 +9,22 @@
 //There are no cycle in two LinkedList
 //Expect O(n) time and O(1) memory
 
+/**
+ * Three Methods:
+ * 
+ * private int getLength(ListNode head): 
+ * get length of a linkedlist
+ * 
+ * private ListNode getIntersectionhelper(int d, ListNode1, ListNode2):
+ * d is the difference of length of two linkedlists
+ * ListNode1 is the head of longer linkedlist, ListNode2 is the head of
+ * shorter LinkedList
+ * 
+ * public ListNode getIntersection(ListNode1, ListNode2)
+ * first caculate the difference of length, then according to the difference,
+ * call the helper method
+ * */
+
 using System;
 using System.Collections.Generic;
 using System.Collections;
