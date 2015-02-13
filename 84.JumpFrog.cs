@@ -35,11 +35,14 @@
 
 
 using System;
+using System.Collections.Generic;
 
 namespace JumpFrog
 {
 	class Finder{
-		public static int FindJump(int n){
+	
+		//recursive solution, simple code, but worse time complexity
+		public static int FindJump(int n){//Time: O(2^n), space:O(1)
 			if (n == 1)
 				return 1;
 			if (n == 2)
@@ -48,6 +51,41 @@ namespace JumpFrog
 			return result;
 		}
 
+		//iterative solution, no need to use list, time:O(n), space:O(1)
+		//longer code, but better time complexity
+		public static int FindJumpIterative(int n){
+			if (n == 1)
+				return 1;
+			if (n == 2)
+				return 2;
+			int a = 1, b = 2, c = 0;
+			for (int i = 3; i <= n; i++) {
+				c = a + b;
+				a = b;
+				b = c;
+			}
+			return b;
+		}
+
+		//Iterative solution, time: O(n), space:O(1)
+		public static int FindJumpThreeIterative(int n){
+			if (n == 1)
+				return 1;
+			if (n == 2)
+				return 2;
+			if (n == 3)
+				return 4;
+			int a = 1, b = 2, c = 4, d = 0;
+			for (int i = 4; i <= n; i++) {
+				d = a + b + c;
+				a = b;
+				b = c;
+				c = d;
+			}
+			return c;
+		}
+
+		//recursive solution, time: O(3^n), space:O(1)
 		public static int FindJumpThree(int n){
 			if (n == 1)
 				return 1;
@@ -60,12 +98,35 @@ namespace JumpFrog
 		}
 	}
 
+	//Memorized Recursive Method, use a global list to store values, time:O(n),space:O(n)
+	//this method is recursive method but faster than naive recursive method. And it's 
+	//very fast when we need to do lookup for many times.
+	class CacheFinder{
+		private List<int> cache = new List<int> ();
+		public CacheFinder(){
+			this.cache.Add (1);
+			this.cache.Add (2);
+			this.cache.Add (4);
+		}
+
+		//Memorized Recursive Method, for one time: time: O(n), space:O(n)
+		public int FindJumpMR(int n){
+			if (n > cache.Count)
+				cache.Add (FindJumpMR (n - 1) + FindJumpMR (n - 2)+FindJumpMR(n-3));
+			return cache [n - 1];
+		}
+	}
+
 	class MainClass
 	{
 		public static void Main (string[] args)
 		{
 			Console.WriteLine (Finder.FindJump (11));
-			Console.WriteLine (Finder.FindJumpThree (7));
+			Console.WriteLine (Finder.FindJumpThree (9));
+			Console.WriteLine (Finder.FindJumpIterative (11)); 
+			Console.WriteLine (Finder.FindJumpThreeIterative (9));
+			CacheFinder cf = new CacheFinder ();
+			Console.WriteLine (cf.FindJumpMR (9));
 		}
 	}
 }
