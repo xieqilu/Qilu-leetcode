@@ -71,6 +71,7 @@ namespace LowestCommonAncestorBST
 				return null;
 			}
 
+			//Recursive solution for BT, time: O(h), h is the height, O(logn), n is the number of nodes
 			public TreeNode FindLCAForBT(TreeNode root, TreeNode p, TreeNode q) //find lowest common ancestor of a Binary Tree
 			{
 				if(root == null || p == null || q == null)
