@@ -8,7 +8,8 @@
  * solution:
  * use n&(n-1) to get rid of the rightmost 1 in n
  * 
- * first convert a and b to long
+ * no need to convert a and b to long, just use typecast
+ * when get product a and b. long product = (long)a * (long)b
  * then get their product and do n&(n-1) until product=0
  * count how many times we can do n&(n-1)
  * */
@@ -19,9 +20,7 @@ namespace FindSetBitsInProduct
 {
 	class Finder{
 		public static int FindSetBits(int a, int b){
-			long along = Convert.ToInt64 (a);
-			long blong = Convert.ToInt64 (b);
-			long product = along * blong;
+			long product = (long)a * (long)b;
 			int count = 0;
 			while (product != 0) {
 				product = product & (product - 1); //get rid of the rightmost 1
