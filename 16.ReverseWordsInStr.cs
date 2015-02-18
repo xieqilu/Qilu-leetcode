@@ -24,6 +24,25 @@ we need to preprocess the string to remove all leading, trailing and concecutive
 duplicate spaces
 
 Leetcode better solution:
+ * In Java, String.substring() method can take two arguments.
+ * For example, String.substring(a,b) will get the substring starting
+ * at index a and ending at index (b-1).
+ * 
+ * BUT in C#, String.substring method can also take two arguments,
+ * For example, String,Substring(s,l) will get the substring starting
+ * at index s and has the length of l.
+ * 
+ * So we can iterate the given string in one pass and keep track of the 
+ * starting and ending (a and b) position of a word, then when we need to
+ * append the word to StringBuilder, we can use b-a to get the length of 
+ * the word, then use String.Substring(s,l) to get the word.
+ * 
+ * In detail:
+ * we use int j to keep track of ending position of a word. In the loop, if 
+ * current char is ' ', we let j=i. So that j would ignore all leading, trailing
+ * or concecutive duplicate space and move with i. Until current char is not space,
+ * j will stay at the last space found, then we check if s.charAt(i-1) is ' ' or i==0.
+ * If it is, we found a word, then append the word to StringBuilder.
 */
 
 
@@ -35,6 +54,23 @@ namespace ReverseWords
 {
 	public class Reverser
 	{
+		//Leetcode official solution, much simpler and better than mine!
+		public static string ReverseBetter(string str){
+			StringBuilder sb = new StringBuilder ();
+			int j = str.Length;   // j is used to keep track of ending position of a word
+			for (int i = str.Length - 1; i >= 0; i--) {
+				if (str [i] == ' ')  //ignore all the leading, trailing and concecutive duplicate spaces
+					j = i;
+				else if(i==0 || str[i-1]==' '){  //Notice the use of else if, detect a word
+					if (sb.Length != 0)  //if it is not the first word
+						sb.Append (' ');
+					sb.Append (str.Substring (i, j - i));
+				}
+			}
+			return sb.ToString ();
+		}
+
+
 		private static bool IsAllSpace(string str){ //check if a string contains only spaces
 			foreach (char c in str) {
 				if (c != ' ')
@@ -97,11 +133,13 @@ namespace ReverseWords
 	{
 		public static void Main (string[] args)
 		{
-			string result = Reverser.Reverse ("    how     are     you    today");
+			string result = Reverser.Reverse ("    how     are     you    today    ");
 			Console.WriteLine("/"+"    how     are     you    today    "+"/");
 			Console.WriteLine ("/"+result+"/");
+			Console.WriteLine ("/"+Reverser.ReverseBetter("    how     are     you    today    ")+"/");
 			Console.WriteLine ("/" + "    " + "/");
 			Console.WriteLine("/"+Reverser.Reverse("    ")+"/");
+			Console.WriteLine("/"+Reverser.ReverseBetter("    ")+"/");
 		}
 	}
 }
