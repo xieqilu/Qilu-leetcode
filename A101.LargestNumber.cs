@@ -48,9 +48,9 @@ namespace LargestNumber
 			//use delegate to invoke anonymous comparison method
 
 			strList.Sort (delegate(string x, string y) { //return: positive:x>y, negative:x<y, zero:x==y
-				if(Convert.ToInt32(x+y)>Convert.ToInt32(y+x))
+				if(Convert.ToInt64(x+y)>Convert.ToInt64(y+x))
 					return 1;
-				if(Convert.ToInt32(x+y)<Convert.ToInt32(y+x))
+				if(Convert.ToInt64(x+y)<Convert.ToInt64(y+x))
 					return -1;
 				return 0;
 			});
