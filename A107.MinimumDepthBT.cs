@@ -38,12 +38,8 @@ The minimum depth is the number of nodes along the shortest path from the root n
     public int MinDepth(TreeNode root) {
         if(root==null) return 0;
         if(root.left==null || root.right==null)
-            return 1+Math.Max(MinDepth(root.left),MinDepth(root.right));public class Solution {
-    private void Swap<T>(ref T a, ref T b){
-        T temp = a;
-        a=b;
-        b=temp;
-    }
+            return 1+Math.Max(MinDepth(root.left),MinDepth(root.right));
+
     
     
 public class Solution {
