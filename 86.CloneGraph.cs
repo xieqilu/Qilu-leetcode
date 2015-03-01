@@ -61,25 +61,26 @@ namespace CloneGraph
     		public UndirectedGraphNode CloneGraph(UndirectedGraphNode node) {
         		if (node == null)
 				return null;
-			Dictionary<UndirectedGraphNode, UndirectedGraphNode> dic = new Dictionary<UndirectedGraphNode, UndirectedGraphNode> ();			Queue<UndirectedGraphNode> q = new Queue<UndirectedGraphNode> ();
+			Dictionary<UndirectedGraphNode, UndirectedGraphNode> dic = new Dictionary<UndirectedGraphNode, UndirectedGraphNode>();			
+			Queue<UndirectedGraphNode> q = new Queue<UndirectedGraphNode>();
 			UndirectedGraphNode newNode = new UndirectedGraphNode (node.label);
-			q.Enqueue (node);
-			dic.Add (node, newNode);
+			q.Enqueue(node);
+			dic.Add(node, newNode);
 			while (q.Count != 0) {
-				UndirectedGraphNode currNode = q.Dequeue ();
-				IList<UndirectedGraphNode> neighbors = currNode.neighbors;
-				foreach (UndirectedGraphNode neighbor in neighbors) {
+				UndirectedGraphNode currNode = q.Dequeue();
+				foreach (UndirectedGraphNode neighbor in currNode.neighbors) {
 					if (!dic.ContainsKey (neighbor)) {
-						q.Enqueue (neighbor);
+						q.Enqueue(neighbor);
 						UndirectedGraphNode copyNeighbor = new UndirectedGraphNode (neighbor.label);
-						dic [currNode].neighbors.Add (copyNeighbor);
-						dic.Add (neighbor, copyNeighbor);
+						dic[currNode].neighbors.Add(copyNeighbor);
+						dic.Add(neighbor, copyNeighbor);
 					} else
-						dic [currNode].neighbors.Add (dic [neighbor]);
+						dic[currNode].neighbors.Add (dic[neighbor]);
 				}
 			}
 			return newNode;
     }
+}
     
  //DFS Recursive Solution
  public class Solution {
