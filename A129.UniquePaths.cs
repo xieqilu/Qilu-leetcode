@@ -24,6 +24,11 @@ Base case: matrix[m,j] and matrix[i,n] all have only one unique path, so the val
 
 Time complexity: O(mn) 
 Space complexity: O(mn)
+
+Special Note: The above solution is equvalient to a Memorized Recursive solution. If we use recursive
+solution, the relationship is the same. And in order to avoid duplicate recursive calls, we will use
+a matrix to memorize unique paths from each cell. So eventually we will also fill a m*n matrix using
+the recursive solution and the time and space complexity is the same.
 */
 
 //Dynamic Programming solution O(mn)
