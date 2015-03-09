@@ -61,7 +61,7 @@ public class Solution {
 public class Solution {
    public String ConvertToTitle(int n) {
         int head = 64;
-        System.Text.StringBuilder ret = new System.Text.StringBuilder();
+        StringBuilder ret = new StringBuilder();
         while (n > 0) {
             int last = n % 26;
             last = (last == 0) ? 26:last;
