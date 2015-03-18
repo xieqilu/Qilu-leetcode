@@ -36,6 +36,33 @@ If we keep dividing this problem, at the end n would be 0, then we just return 1
 Also we need to handle the edge case when x is 0, we always return 0.
 
 Time complexity: O(logn)  same as binary search
+
+
+Solution3: Iterative Solution
+Always think of how to conver a recursive solution to iterative solution.
+For this problem, it's a little bit tricky.
+
+First there is a special edge case:
+if n is -2147483648 (the smallest 32 bits Integer), then Math.Abs(n) would cause
+a runtime error. Because the largest 32 bits Integer is 2147483647. And -n would not
+cause a runtime error, but -n is also -2147483648, the '-' operator would not convert
+n to a positive number. 
+So we cannot try to convert n to positive when n is a negative number, we must deal with 
+n directly (not its absolute value of -n).
+
+Through solution2, we know that this problem can be solved in Logn time using iterative method.
+No matter n is positive or negative, the condition of while loop is while(n!=0), in each pass
+we divide n by 2, then we can make sure the loop will be executed for logn times. 
+Before the loop, we create a double res as 1 and use it to store the final result.
+Now, in the loop, we cannot directly use the same code in the recursive method. Because the recursive
+solution is a bottom-up method, and the iterative solution should be a top-down method. But the logic
+is the same, we need to handle the situation when n%2!=0. So No matter what n%2 is, we always do x*=x,
+if n&2>0 (n>0) we append current x to res by res*=x, and if n&2<0 (n<0), we append current x to res by
+res/=x.
+
+No matter what n is, eventually the last loop will occur when n is 1, and the intermediate result stored
+in x will be append to res. Then whenever n%2>0, that means in this pass, the relationship changes. So 
+we need to append an additional current x to res. (note it's append current x not original x)
 */
 
 //Naive Approach(TLE): Time: O(n)
@@ -74,3 +101,22 @@ class Solution {
     }
     
 }
+
+//Iterative Solution, Time: O(logn)
+class Solution {
+    public double Pow(double x, int n) {
+        if(x==0) return 0;
+        if(n==0) return 1;
+        double res = 1;
+        while(n!=0){
+           if(n%2>0)
+                res*=x;
+            if(n%2<0)
+                res/=x;
+            x*=x;
+            n/=2;
+        }
+        return res;
+    }
+}
+
