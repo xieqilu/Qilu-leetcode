@@ -58,22 +58,21 @@ Time: O(n)  n is the number of nodes in the tree
  
 //Solution1: Recursive Pre-order traversal
 public class Solution {
-    private TreeNode prev; //global variable
     private void FlattenHelper(TreeNode root, ref TreeNode prev){
-        if(root==null) return;
+        if(root==null) return; //Base case 
         //Be aware that root.right might be modified to point to left child in the first recursive call
-        TreeNode right = root.right; //must retrieve right child here
         if(prev!=null){
             prev.left=null;
             prev.right=root; //modify prev.right
         }
-        prev=root;
-        FlattenHelper(root.left, ref prev); 
-        FlattenHelper(right, ref prev); //cannot directly use root.right, will lead StackOverflow
+        prev=root; //update prev
+        TreeNode right = root.right; //must retrieve current root.right before doing any recursive calls
+        FlattenHelper(root.left, ref prev); //This first recursive call might modify prev.right (root.right)
+        FlattenHelper(right, ref prev);////cannot directly use root.right, will lead StackOverflow
     }
     
     public void Flatten(TreeNode root) {
         TreeNode prev=null;
-        flattenHelper(root, ref prev);
+        FlattenHelper(root, ref prev);
     }
 }
