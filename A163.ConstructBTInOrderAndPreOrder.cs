@@ -69,7 +69,7 @@ can avoid unnessary arguments to make the recursive call simple. The only argume
 1, preorder array: to find the current root
 2, preL: to ger current root
 3, preR: use preL and preR to check the base case
-4, inL: get the number of elements that will be used for subtree of current root
+4, inL: get the number of elements that will be used for left subtree of current root
 5, map: get index of current root
 
 Time: O(n)  Space: O(n)
