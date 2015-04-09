@@ -75,18 +75,18 @@
 public class Solution {
     //Method to merge two sorted lists
     private ListNode MergeTwoLists(ListNode l1, ListNode l2) {
-        if(l1==null||l2==null){
+         if(l1==null||l2==null){
             if(l1 ==null) return l2;
             if(l2 ==null) return l1;
         }
         ListNode newHead,p,p1,p2;
         if(l1.val < l2.val){
-            newHead = new ListNode(l1.val);
+            newHead = l1;
              p1 = l1.next;
              p2 = l2;
         }
         else{
-            newHead = new ListNode(l2.val);
+            newHead = l2;
              p1 = l1;
              p2 = l2.next;
         }
@@ -94,25 +94,19 @@ public class Solution {
          p = newHead;
         while(p1!=null && p2!=null){
             if(p1.val < p2.val){
-                p.next = new ListNode(p1.val);
+                p.next = p1;
                 p1 = p1.next;
             }
             else{
-                p.next = new ListNode(p2.val);
+                p.next = p2;
                 p2 = p2.next;
             }
             p=p.next;
         }
-        while(p1!=null){
-            p.next = new ListNode(p1.val);
-            p1 = p1.next;
-            p=p.next;
-        }
-        while(p2!=null){
-            p.next = new ListNode(p2.val);
-            p2 = p2.next;
-            p=p.next;
-        }
+        //no need to use the while loop, directly append p1 or p2 to p
+        //because rest nodes of p1 or p2 are already sorted
+        if(p1!=null) p.next=p1;
+        if(p2!=null) p.next=p2;
         return newHead;
     }
     
