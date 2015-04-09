@@ -2,11 +2,18 @@
 Sort a linked list using insertion sort.
 
 Idea of Insertion Sort:
-Insertion sort iterates, consuming one input element each repetition, and growing a sorted output list. Each iteration, insertion sort removes one element from the input data, finds the location it belongs within the sorted list, and inserts it there. It repeats until no input elements remain.
+Insertion sort iterates, consuming one input element each repetition, and growing a sorted output list. 
+Each iteration, insertion sort removes one element from the input data, finds the location it belongs within the sorted list, 
+and inserts it there. It repeats until no input elements remain.
 
-Sorting is typically done in-place, by iterating up the array, growing the sorted list behind it. At each array-position, it checks the value there against the largest value in the sorted list (which happens to be next to it, in the previous array-position checked). If larger, it leaves the element in place and moves to the next. If smaller, it finds the correct position within the sorted list, shifts all the larger values up to make a space, and inserts into that correct position.
+Sorting is typically done in-place, by iterating up the array, growing the sorted list behind it. 
+At each array-position, it checks the value there against the largest value in the sorted list 
+(which happens to be next to it, in the previous array-position checked). 
+If larger, it leaves the element in place and moves to the next. If smaller, it finds the correct position within the sorted list, 
+shifts all the larger values up to make a space, and inserts into that correct position.
 
-Time: O(n)  Space: O(1)
+Time: Worst: O(n^2)  Best: O(n)
+Space: O(1)
 More efficient in practice than most other simple quadratic (i.e., O(n2)) algorithms 
 such as selection sort or bubble sort
 
@@ -31,7 +38,8 @@ stay the same, because now prev.next points to original curr.next.
 each pass, then if curr is moved, we set newPrev=prev. And at the end of each pass, always update prev=newPrev and
 curr=newCurr.
 
-Time: O(n)  Space:(1)
+Time: worst: O(n^2) Best: O(n) 
+Space:(1)
 */
 
 /**
