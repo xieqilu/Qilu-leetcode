@@ -80,7 +80,7 @@ Time Complexity: O(n)
  *     public TreeNode(int x) { val = x; }
  * }
  */
-/*
+
 //Solution1: Recursive DFS Solution  Time: O(n)
 public class Solution {
     public bool IsSymmetric(TreeNode root) {
@@ -100,7 +100,7 @@ public class Solution {
         return false;
     }
 }
-*/
+
 
 //Solution2: Iterative BFS using Queue  Time: O(n)
 public class Solution {
