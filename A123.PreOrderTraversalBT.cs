@@ -38,15 +38,34 @@ right child into the stack then left child.
  *     public TreeNode(int x) { val = x; }
  * }
  */
+ 
+//Solution1: Recursive
 public class Solution {
-    public List<int> preorderTraversal(TreeNode root) {
+    public IList<int> PreorderTraversal(TreeNode root) {
+        IList<int> result = new List<int>();
+        PreorderDFS(root,result);
+        return result;
+    }
+    
+    private void PreorderDFS(TreeNode root, IList<int> result){
+        if(root==null)
+            return;
+        result.Add(root.val);
+        PreorderDFS(root.left,result);
+        PreorderDFS(root.right,result);
+    }
+}
+
+//Solution2: Iterative 
+public class Solution {
+    public IList<int> PreorderTraversal(TreeNode root) {
         List<int> result = new List<int>();
         if(root == null) return result;
         Stack<TreeNode> stack = new Stack<TreeNode>();
         stack.Push(root);
         while(stack.Count!=0){
             TreeNode current = stack.Pop();
-            result.add(current.val);
+            result.Add(current.val);
             if(current.right!=null)
                 stack.Push(current.right);
             if(current.left!=null)
