@@ -51,6 +51,7 @@ namespace TestConsoleApp
 Lets move one step ahead to see how more than one threads can be run in parallel. 
 Following code snippet will demonstrate such scenario. Though, I am using two threads only here, 
 you can add as many you want to it as per your need.
+*/
 
 //Solution for starting and using two threads in parallel
 using System;
