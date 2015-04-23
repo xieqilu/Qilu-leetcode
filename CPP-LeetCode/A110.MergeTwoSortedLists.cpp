@@ -19,6 +19,50 @@
  * 
  * */
  
+ //Driver Code: two lines form a single input containing two LinkedList head nodes
+ int main() {
+    ofstream fout("user.out");
+    string line;
+    while (getline(cin, line)) {
+        
+        ListNode* param_1 = __Deserializer__::toListNode(line);
+        getline(cin, line);
+        ListNode* param_2 = __Deserializer__::toListNode(line);
+        
+        fout << __Serializer__::serialize(Solution().mergeTwoLists(
+            param_1, param_2
+        )) << endl;
+    }
+    return 0;
+}
+
+//Print Input Code:
+string join(vector<string>& elements, char* separator) {
+    switch (elements.size()) {
+        case 0:
+            return "";
+        case 1:
+            return elements[0];
+        default:
+            ostringstream os; 
+            copy(elements.begin(), elements.end()-1, ostream_iterator<string>(os, separator));
+            os << *elements.rbegin();
+            return os.str();
+    }
+}
+
+int main() {
+    vector<string> strs(2, "");
+    while (true) {
+        if (!getline(cin, strs[0])) break;
+        getline(cin, strs[1]);
+        
+        cout << join(strs, ", ") << endl;
+    }
+
+  return 0;
+}
+ 
  /**
  * Definition for singly-linked list.
  * struct ListNode {
