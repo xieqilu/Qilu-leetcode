@@ -43,6 +43,33 @@ Or we can set the initial value of prev and total as first char, then start iter
 the second char of string.
 */
 
+//Driver Code
+int main() {
+    ofstream fout("user.out");
+    string line;
+    while (getline(cin, line)) {
+        
+        string param_1 = __Deserializer__::toString(line);
+        
+        fout << __Serializer__::serialize(Solution().romanToInt(
+            param_1
+        )) << endl;
+    }
+    return 0;
+}
+
+//Print Input Lines
+int main() {
+  string s;
+  while (getline(cin, s)) {
+    cout << s << endl;
+  }
+
+  return 0;
+}
+
+
+//Solution Code
 class Solution {
 public:
     int table[256];
