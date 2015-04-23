@@ -172,3 +172,56 @@ class Test{
 	}
 }
 
+//最终版本：use lock() and unlock() method to solve this problem
+using System;
+using System.Collectiosn.Generic;
+using System.Threading;
+
+// To execute C#, please define "static void Main" on a class
+// named Solution.
+
+Event myEvent;
+
+class Callback {
+    void run() {
+        myEvent.registerCallback(...)
+    }
+}
+
+void lock(object);
+void unlock(object);
+
+class Event {
+    private bool flag;
+    private Queue<Callback> q = new Queue<Callback>();
+    private static object thisLock = new object();
+    void registerCallback(Callback cb) {
+       lock(thisLock)
+        if (flag) {
+            unlock(thisLock);
+            cb.run();
+       } else {
+           q.Enqueue(cb);
+       }
+        unlock(thisLock)
+    }
+
+    void eventFired() {
+        lock(thisLock)
+        //if(q.Count!=0)
+        
+        unlock(thisLock)
+        while(true){
+            lock(thisLock)
+            if(q.Count!=0){
+                unlock(thisLock)
+                q.Dequeue().run();
+            }
+            else{                
+                flag=true;
+                unlock(thisLock);
+                break;
+            }
+        }
+    }
+}
