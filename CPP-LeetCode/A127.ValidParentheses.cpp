@@ -26,6 +26,28 @@ use of Dictionary. And also if we want to change the matching rules, we can easi
 Dicitionary instead changing code of the method. That's a great trick, must remember it!
 */
 
+//Driver Code
+int main() {
+    ofstream fout("user.out");
+    string line;
+    while (getline(cin, line)) { //read input line from STDIN
+        string s = line.substr(1, line.length() - 2); //get substring
+        fout << __Serializer__::serialize(Solution().isValid(s)) << endl;
+    }
+    return 0;
+}
+
+//Print Input Code:
+int main() {
+  string s;
+  while (getline(cin, s)) {
+    cout << s << endl; //print using STDOUT
+  }
+
+  return 0;
+}
+
+
 //Solution1: Better and Clean Solution
 class Solution {
 public:
