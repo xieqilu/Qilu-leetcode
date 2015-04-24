@@ -12,7 +12,7 @@ How can it be improved?
 1, Initialize found to false (bool found = false)
 2, change the condition of while loop to while(*s)
 3, If we find a ch in s, after changing found to true, break the loop
-
+*/
 //original wrong code
 bool findch(const char* s, char ch){
     bool found;
