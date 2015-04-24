@@ -1,5 +1,9 @@
 //What does the following program print?
 
+//Key point:
+//When the subclass is created and deleted, the constructors and destructors of itself and its parent class 
+//will be called.
+
 #include <iostream>
 
 using namespace std;
@@ -26,10 +30,10 @@ void foo(A *a) {
 }
 
 int main(int, char**) {
-    A *a = new A;
-    B *b = new B;
+    A *a = new A; 
+    B *b = new B; //calls both A and B constructor
     foo(a);
-    foo(b);
+    foo(b); //calls both A and B destructor
     
     return (0);
 }
