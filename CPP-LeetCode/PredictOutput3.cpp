@@ -17,7 +17,7 @@ Output:
 ||: 1
 
 Explain:
-"|" is a binary operator, it get the binary OR result of a and b. a is 010, b is 100, so a|b is 110, which is 6
-"||" is a logic operator, it get the logic OR result of a and b. Since a and b both are greater than 0 (true), so the result
+"|" is a BitWise OR operator, it get the BitWise OR result of a and b. a is 010, b is 100, so a|b is 110, which is 6
+"||" is a Logical OR operator, it get the Logical OR result of a and b. Since a and b both are greater than 0 (true), so the result
 is true, which is 1. (note onlyh 0 is false, all other numbers are true).
 */
