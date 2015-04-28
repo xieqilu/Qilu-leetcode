@@ -28,7 +28,7 @@ Note:
 number to determine if it's odd or even.
 
 Time complexity: O(n)   Space: O(1)
-
+*/
 
 //Solution: Time: O(n)  Space: O(1)
 using System;
