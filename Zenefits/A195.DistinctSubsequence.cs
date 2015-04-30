@@ -20,8 +20,10 @@ dp[i-1,j-1] shoud be added.
 the original matching char in S is). So the value of dp[i-1,j] should be added.
 
 If the current char of S and T is not equal. Then dp[i,j] must be equal to dp[i-1,j]. Because the current char
-of T cannot be matched to S, so we can only match T.Substring(0,j-1) to current S to get number of matches for
-T.Substring(0,j).
+of T cannot be matched to S, so the number of T.Substring(0,j) in S.Substring(0,i) is equal to the number of
+T.Substring(0,j) in S.Substring(0,i-1). The current char of S cannot help to match more T.Substring(0,j), because
+S[i-1] and T[j-1] is not equal.
+
 
 
 Solution:
