@@ -40,6 +40,11 @@ The outter for loop will run for n-len*wlen times, the inner while loop will run
 time complexity is (n-len*wlen)*wlen = O(n*wlen), if we consider len and wlen are small constant value, the time complexity
 would be O(n), n is the length of string s.
 
+Or we can see the running time this way:
+Since the length of a single word is len, then the start index of a word can have (n-len) options. So totally there are
+(n-len) possible words. Then by using this approach, a single word can be visited at most twice, it can be visited as the
+first word from i and a word in a substring starting from previous i. Thus the running time would be 2*(n-len), O(n). 
+
 Space complexity: O(len*wlen), since we need to store words array into the dictionary.
 */
 
