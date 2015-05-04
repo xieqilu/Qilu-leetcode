@@ -33,7 +33,8 @@ Method:
 void AddWord(string word): add a word to the trie
 List<string> GetWords(string prefix): get a list of words in the trie with a given prefix
 bool CheckWord(string word): check if a word exists in the Trie. Check if the given word can be
-							matched excately by a word in the Trie.
+			matched excately by a word in the Trie.
+int CountWords(string prefix): get number of words in the trie that share the given prefix
 							
 							
 TrieNode class:
@@ -97,6 +98,19 @@ public class Trie
 				return false;
 		}
 		return lastNode.CheckWord();
+	}
+	
+	//get number of words in trie that share the given prefix
+	public int CountPrefix(string prefix){
+		TrieNode lastNode = root;
+		foreach(char c in prefix){
+			lastNode = lastNode.GetChildNode(c);
+			if(lastNode == null)
+				return 0;
+		}
+		List<string> res = new List<string>();
+		lastNode.GetWords(res);
+		return res.Count;
 	}
 }
 
@@ -181,5 +195,6 @@ public class Test
 		foreach(string s in l1)
 			Console.WriteLine(s);
 		Console.WriteLine(dict.CheckWord("xi"));
+		Console.WriteLine(dict.CountPrefix("ap"));
 	}
 }
